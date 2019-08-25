@@ -58,24 +58,40 @@ class Scorer(object):
                 elif metric_name == 'hem_recall': slice_uids = self.hem_uids
                 elif metric_name == 'stroke_recall': slice_uids = self.stroke_uids
                 uid_inslice = [t in slice_uids for t in uids]
-                uids = list(compress(uids, uid_inslice))
-                golds = list(compress(golds, uid_inslice))
-                preds = list(compress(preds, uid_inslice))
-                probs = list(compress(probs, uid_inslice))
+                mod_uids = list(compress(uids, uid_inslice))
+                mod_golds = list(compress(golds, uid_inslice))
+                mod_preds = list(compress(preds, uid_inslice))
+                mod_probs = list(compress(probs, uid_inslice))
 
-            # handle no examples
-            if len(golds) == 0:
-                metric_dict[metric_name] = float("nan")
-                continue
+                # handle no examples
+                if len(mod_golds) == 0:
+                    metric_dict[metric_name] = float("nan")
+                    continue
 
-            golds = array_to_numpy(golds)
-            preds = array_to_numpy(preds)
-            probs = array_to_numpy(probs)
-              
-            res = metric(golds, preds, probs, uids)
-            if isinstance(res, dict):
-                metric_dict.update(res)
+                mod_golds = array_to_numpy(mod_golds)
+                mod_preds = array_to_numpy(mod_preds)
+                mod_probs = array_to_numpy(mod_probs)
+
+                res = metric(mod_golds, mod_preds, mod_probs, mod_uids)
+                if isinstance(res, dict):
+                    metric_dict.update(res)
+                else:
+                    metric_dict[metric_name] = res
+                    
             else:
-                metric_dict[metric_name] = res
+                # handle no examples
+                if len(golds) == 0:
+                    metric_dict[metric_name] = float("nan")
+                    continue
+
+                golds = array_to_numpy(golds)
+                preds = array_to_numpy(preds)
+                probs = array_to_numpy(probs)
+
+                res = metric(golds, preds, probs, uids)
+                if isinstance(res, dict):
+                    metric_dict.update(res)
+                else:
+                    metric_dict[metric_name] = res
 
         return metric_dict
