@@ -1,4 +1,4 @@
-# Medical Image Classification Codebase
+# Medical Image Classification
 
 **v0.1.0**
 
@@ -37,11 +37,22 @@ git clone
 pip install -r requirements.txt
 ```
 
-## Running 
-organize data
-can do jupyter notebook or python run.py
-
-## Sample usage
+## Getting started
 Required files, details on the codebase organization, and an example of how to use this codebase to classify medical images are provided in two Jupyter notebookes: __DICOM_crawler.ipynb__ and __headCTclassifier.ipynb__. 
 - To learn how to extract all pixel data and metadata from a set of DICOM files, see __DICOM_crawler.ipynb__
 - To learn how to use this codebase to classify a set of images, see __headCTclassifier.ipynb__
+
+To enable function calls from the command line, two .py files are provided which contain the same code as the Jupyter notebooks: __run_DICOM_crawler.py__ and __run_classifier.py__.
+
+## Example usage
+We recommend you start with the two Jupyter notebooks listed above, which more thoroughly detail the structure and usage of this codebase. Here, we provide an overview of the required steps to take a set of medical images stored in DICOMs and train a CNN for image classification.
+
+1. Extract the pixel data and metadata from the DICOM files:
+```
+python run_DICOM_crawler.py ....
+```
+2. Manually generate the train.csv, valid.csv, and test. csv files containing the label for each scan, as described in __headCTclassifier.ipynb__.
+3. Train a classifier for this set of images:
+```
+python run_classifier.py ....
+```
