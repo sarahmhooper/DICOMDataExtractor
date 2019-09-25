@@ -28,7 +28,7 @@ Installation instructions are provided in data_extraction/README.md and classifi
 ## Getting started
 Required files, details on the codebase organization, and examples of how to use this codebase to classify medical images are provided in the Jupyter notebookes __tutorials/DICOM_crawler__ and __tutorials/headCTclassifier.ipynb__. 
 - __DICOM_crawler__ will demonstrate how to extract pixel data and metadata from a set of DICOM files.
--__headCTclassifier.ipynb__ will show how to use this codebase to classify a set of medical images.
+- __headCTclassifier.ipynb__ will show how to use this codebase to classify a set of medical images.
 
 To enable function calls from the command line, __run_DICOM_crawler.py__ and __run_classifer.py__ are provided, which contain the same code as the Jupyter notebooks.
 
