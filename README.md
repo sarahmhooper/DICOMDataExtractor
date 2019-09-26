@@ -5,7 +5,7 @@ We provide a general codebase to perform medical image classification via deep l
 ## Data Extraction from DICOM Files
 Medical images are often stored as DICOMs, which can be an inconvenient storage method for machine learning. The metadata stored in each individual DICOM file is inefficient to mine, while grouping all DICOM files from a single scan and stacking the pixel data into a 3d image volume can be a slow process. To address these problems, we provide a DICOM "crawling" script, which provides the following useful functions: 
 - Given a set of DICOM files, the DICOM crawling script organizes all metadata from all provided DICOM files into a single CSV, which can be more conviently mined. 
-- Given a set of DICOM files, the DICOM crawling script stores all pixel data from all provided DICOMs in an h5 file which can be more efficiently accessed and is more familiar to machine learning practitioners. We also provide functionality to automatically identify DICOM files that are axial slices originating from the same scan, stack the files into a 3d image volume, and save the 3d image in the h5 file.
+- Given a set of DICOM files, the DICOM crawling script stores all pixel data from all provided DICOMs in an h5 file which can be more efficiently accessed and is more familiar to machine learning practitioners. We also provide functionality to automatically identify DICOM files that are axial slices originating from the same scan, order and stack the slices into a 3d image volume, and save the 3d image in the h5 file.
 To learn more about this data extraction code, please view data_extraction/README.md. 
 
 ## Medical Image Classification
@@ -39,8 +39,10 @@ We recommend you start with the two Jupyter notebooks listed above, which more t
 ```
 python run_DICOM_crawler.py ....
 ```
-2. Manually generate the train.csv, valid.csv, and test. csv files containing the label for each scan, as described in __headCTclassifier.ipynb__.
+This command will output metadata_example.csv and pixel_data_example.h5. 
+2. Manually generate the train.csv, valid.csv, and test.csv files containing the label for each scan, as described in __headCTclassifier.ipynb__. 
 3. Train a classifier for this set of images:
 ```
 python run_classifier.py ....
 ```
+This command will train a 2d resnet18 to classify the images stored in pixel_data_example.h5 according to the labels in train.csv and valid.csv. It will then evaluate the model according to the labels in test.csv. Files generated from this command include: ...
