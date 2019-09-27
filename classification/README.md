@@ -43,6 +43,10 @@ Required files, details on the codebase organization, and an example of how to u
 To enable function calls from the command line, __run_DICOM_crawler.py__ is provided, which contain the same code as the Jupyter notebooks.
 
 ## Example usage
+
+you can use a jupyter notebook, as shown in the tutorial
+or, you can call from the command line with arguments 
+
 We recommend you start with the two Jupyter notebooks listed above, which more thoroughly detail the structure and usage of this codebase. Here, we provide an overview of the required steps to take a set of medical images stored in DICOMs and train a CNN for image classification.
 
 1. Extract the pixel data and metadata from the DICOM files:
