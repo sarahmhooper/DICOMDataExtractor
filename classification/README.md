@@ -52,9 +52,11 @@ We recommend you start with the two Jupyter notebooks listed above, which more t
 1. Extract the pixel data and metadata from the DICOM files:
 ```
 python run_DICOM_crawler.py ....
+python run_DICOM_crawler.py -h
 ```
 2. Manually generate the train.csv, valid.csv, and test. csv files containing the label for each scan, as described in __headCTclassifier.ipynb__.
 3. Train a classifier for this set of images:
 ```
 python run_classifier.py ....
+python run_classifier.py -h
 ```
