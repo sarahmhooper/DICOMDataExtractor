@@ -31,7 +31,7 @@ pip install -r requirements.txt
 ```
 
 ## Getting started
-Required files, details on the codebase organization, and examples of how to use this codebase to classify medical images are provided in the Jupyter notebook __tutorials/DICOM_crawler.ipynb__. To enable function calls from the command line, __run_DICOM_crawler.py__ is also provided, which performs the same operations as their respective Jupyter notebooks listed above.
+Required files, details on the codebase organization, and examples of how to use this codebase to classify medical images are provided in the Jupyter notebook __tutorials/DICOM_crawler.ipynb__. To enable function calls from the command line, __run_DICOM_crawler.py__ is also provided, which performs the same operations as the Jupyter notebook.
 
 ## Example usage
 Given a set of folders in the directory *storage/dicom_folders*, we can save all of the DICOM metadata into a CSV and save all 3d scans in a h5 file by running:
