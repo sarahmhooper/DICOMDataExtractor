@@ -13,15 +13,15 @@ This project is ongoing, and we'll continue to add to and adjust the codebase ov
 
 *Note: Codebase only supports Python 3.*
 
-1. Create a virtual environment, within which we'll install the codebase and its dependencies:
+1. (Optional) Create a new virtual environment, within which we'll install the codebase and its dependencies:
 ```
 pip install virtualenv
-virtualenv -p python3.6 medImgEnv
+virtualenv -p python3.6 DICOMCrawlEnv
 ```
 
-2. Activate the virtual environment we just created:
+2. Activate the desired virtual environment:
 ```
-source medImgEnv/bin/activate
+source DICOMCrawlEnv/bin/activate
 ```
 
 3. Clone the repository:
