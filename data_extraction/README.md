@@ -1,12 +1,9 @@
-# Medical Image Classification
+## Data Extraction from DICOM Files
 
-This classification codebase was designed to provide a convenient pipeline to take a set of medical images and train a variety of convolutional neural networks (CNN) to classify those images in Pytorch. Features include:
-
-- Automated data loading, training, and model evaluation
-- Implementation of many common CNNs
-- Support for 2d, 2.5d, and 3d medical image classification
-- Support for weak supervision using text reports
-- Training monitoring via tensorboardX
+Medical images are often stored as DICOMs, which can be an inconvenient storage method for machine learning. The metadata stored in each individual DICOM file is inefficient to mine, while grouping all DICOM files from a single scan and stacking the pixel data into a 3d image volume can be a slow process. To address these problems, we provide a DICOM "crawling" script, which provides the following useful functions: 
+- Given a set of DICOM files, the DICOM crawling script organizes all metadata from all provided DICOM files into a single CSV, which can be more conviently mined. 
+- Given a set of DICOM files, the script stores all pixel data from all provided DICOMs in an h5 file which can be more efficiently accessed and is more familiar to machine learning practitioners. 
+- If desired, the script will automatically identify DICOM files that originated from the same scan, order the slices into a 3d image volume, and save the 3d image in an h5 file.
 
 ## Installation 
 
@@ -34,17 +31,17 @@ pip install -r requirements.txt
 ```
 
 ## Getting started
-Required files, details on the codebase organization, and examples of how to use this codebase to classify medical images are provided in the Jupyter notebookes __tutorials/headCTclassifier.ipynb__. To enable function calls from the command line, __run_DICOM_crawler.py__ is also provided, which perform the same operations as their respective Jupyter notebooks listed above.
+Required files, details on the codebase organization, and examples of how to use this codebase to classify medical images are provided in the Jupyter notebook __tutorials/DICOM_crawler.ipynb__. To enable function calls from the command line, __run_DICOM_crawler.py__ is also provided, which performs the same operations as their respective Jupyter notebooks listed above.
 
 ## Example usage
-To train a classifier over a set of images stored in pixel_data_example.h5 with labels stored in train_example.csv, validation_example.csv, and test_example.csv, run:
+Given a set of folders in the directory *storage/dicom_folders*, we can save all of the DICOM metadata into a CSV and save all 3d scans in a h5 file by running:
 ```
-python run_classifier.py ....
+python run_DICOM_crawler.py ....
 ```
-This command will train a 2d resnet18 to classify the images stored in pixel_data_example.h5 according to the labels in train.csv and valid.csv. It will then evaluate the model according to the labels in test.csv. Files generated from this command include: train_log.txt, which stores all outputs from the training process; predicted_labels.csv, which are the best trained model's predictions on the test set (if provided, otherwise the validation set); learning_curve.png, a simple plot of the training and validation loss curves throughout training; a tensorboard events file, which you can use to view all performance metrics and losses as a function of training the train and validation sets; model_best_train_loss.pth and model_best_val_loss.pth, which contain the stored models that acheived the best loss on the trian and validation set, respectively; and finally all_params.txt, which contains the configuration used this run.
+This command will output metadata_example.csv, containing all metadata from all DICOMs, and pixel_data_example.h5 where all pixel data from the DICOMs are stored. 
 
 To view all parameter options for training, run:
 
 ```
-python run_classifier.py -h
+python run_DICOM_crawler.py -h
 ```
