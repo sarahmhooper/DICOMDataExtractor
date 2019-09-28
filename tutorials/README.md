@@ -1,5 +1,5 @@
 
-##Tutorials
+# Tutorials
 
 Required files, details on the codebase organization, and examples of how to use this codebase to classify medical images are provided in the Jupyter notebookes __DICOM_crawler.ipynb__, __headCTclassifier.ipynb__, and __walkthrough.ipynb__. We recommend the following order of tutorials to get started:
 
