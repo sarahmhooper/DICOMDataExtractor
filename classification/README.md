@@ -34,7 +34,7 @@ pip install -r requirements.txt
 ```
 
 ## Getting started
-Required files, details on the codebase organization, and examples of how to use this codebase to classify medical images are provided in the Jupyter notebookes __tutorials/headCTclassifier.ipynb__. To enable function calls from the command line, __run_DICOM_crawler.py__ is also provided, which perform the same operations as their respective Jupyter notebooks listed above.
+Required files, details on the codebase organization, and examples of how to use this codebase to classify medical images are provided in the Jupyter notebook __tutorials/headCTclassifier.ipynb__. To enable function calls from the command line, __run_classifier.py__ is also provided, which performs the same operations as the Jupyter notebook.
 
 ## Example usage
 To train a classifier over a set of images stored in pixel_data_example.h5 with labels stored in train_example.csv, validation_example.csv, and test_example.csv, run:
