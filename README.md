@@ -26,7 +26,7 @@ This project is ongoing, and we'll continue to add to and adjust the codebase ov
 Installation instructions are provided in data_extraction/README.md and classification/README.md.
 
 ## Getting started
-Required files, details on the codebase organization, and examples of how to use this codebase to classify medical images are provided in the Jupyter notebookes __tutorials/DICOM_crawler.ipynb__,  __tutorials/headCTclassifier.ipynb__, and __tutorials/walkthrough.ipynb__. We recommend the following order of tutorials to get started:
+Required files, details on the codebase organization, and examples of how to use this codebase to classify medical images are provided in the Jupyter notebooks __tutorials/DICOM_crawler.ipynb__,  __tutorials/headCTclassifier.ipynb__, and __tutorials/walkthrough.ipynb__. We recommend the following order of tutorials to get started:
 1. __DICOM_crawler.ipynb__ will demonstrate how to extract pixel data and metadata from a set of DICOM files.
 2. __headCTclassifier.ipynb__ will show how to use this codebase to classify a set of medical images stored in a h5 file.
 3. __walkthrough.ipynb__ will give an example end-to-end walkthrough on how to use the DICOM crawling and classification pipeline to classify a real dataset.
