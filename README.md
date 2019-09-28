@@ -40,7 +40,7 @@ We recommend you start with the tutorials listed above, which more thoroughly de
 ```
 python run_DICOM_crawler.py ....
 ```
-This command will output metadata_example.csv, containing all metadata from all DICOMs, and pixel_data_example.h5 where all pixel data from the DICOMs are stored. 
+   This command will output metadata_example.csv, containing all metadata from all DICOMs, and pixel_data_example.h5 where all pixel data from the DICOMs are stored. 
 
 2. Compile train.csv, valid.csv, and test.csv files containing the ID and label for each scan, as described in headCTclassifier.ipynb. 
 
@@ -48,4 +48,4 @@ This command will output metadata_example.csv, containing all metadata from all 
 ```
 python run_classifier.py ....
 ```
-This command will train a 2d resnet18 to classify the images stored in pixel_data_example.h5 according to the labels in train.csv and valid.csv. It will then evaluate the model according to the labels in test.csv. Files generated from this command include: train_log.txt, which stores all outputs from the training process; predicted_labels.csv, which are the best trained model's predictions on the test set (if provided, otherwise the validation set); learning_curve.png, a simple plot of the training and validation loss curves throughout training; a tensorboard events file, which you can use to view all performance metrics and losses as a function of training the train and validation sets; model_best_train_loss.pth and model_best_val_loss.pth, which contain the stored models that acheived the best loss on the trian and validation set, respectively; and finally all_params.txt, which contains the configuration used this run.
+   This command will train a 2d resnet18 to classify the images stored in pixel_data_example.h5 according to the labels in train.csv and valid.csv. It will then evaluate the model according to the labels in test.csv. Files generated from this command include: train_log.txt, which stores all outputs from the training process; predicted_labels.csv, which are the best trained model's predictions on the test set (if provided, otherwise the validation set); learning_curve.png, a simple plot of the training and validation loss curves throughout training; a tensorboard events file, which you can use to view all performance metrics and losses as a function of training the train and validation sets; model_best_train_loss.pth and model_best_val_loss.pth, which contain the stored models that acheived the best loss on the trian and validation set, respectively; and finally all_params.txt, which contains the configuration used this run.
