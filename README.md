@@ -8,19 +8,44 @@ Medical images are often stored as DICOMs, which can be an inconvenient storage 
 
 This project is ongoing, and we'll continue to add to and adjust the codebase over time. Any comments, suggestions, or additions are welcome!
 
+
 ## Installation 
 
 *Note: Codebase only supports Python 3.*
 
-Installation instructions are provided in data_extraction/README.md and classification/README.md.
+1. Create a virtual environment, within which we'll install the codebase and its dependencies:
+```
+pip install virtualenv
+virtualenv -p python3.6 medImgEnv
+```
+
+2. Activate the virtual environment we just created:
+```
+source medImgEnv/bin/activate
+```
+
+3. Clone the repository:
+```
+git clone 
+```
+
+4. Install the required Python dependencies: 
+```
+pip install -r requirements.txt
+```
 
 ## Getting started
 __DICOM_crawler.ipynb__ will demonstrate how to extract pixel data and metadata from a set of DICOM files. To enable function calls from the command line, __run_DICOM_crawler.py__ is also provided to perform the same operations as the Jupyter notebook.
 
 ## Example usage
-Extract the pixel data and metadata from the DICOM files:
+Given a set of folders in the directory *storage/dicom_folders*, we can save all of the DICOM metadata into a CSV and save all 3d scans in a h5 file by running:
 ```
 python run_DICOM_crawler.py ....
 ```
-   This command will output metadata_example.csv, containing all metadata from all DICOMs, and pixel_data_example.h5 where all pixel data from the DICOMs are stored. 
+This command will output metadata_example.csv, containing all metadata from all DICOMs, and pixel_data_example.h5 where all pixel data from the DICOMs are stored. 
 
+To view all parameter options for training, run:
+
+```
+python run_DICOM_crawler.py -h
+```
