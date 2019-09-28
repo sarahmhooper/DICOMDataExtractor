@@ -40,7 +40,7 @@ We recommend you start with the tutorials listed above, which more thoroughly de
 ```
 python run_DICOM_crawler.py ....
 ```
-   This command will output metadata_example.csv, containing all metadata from all DICOMs, and pixel_data_example.h5 where all pixel data from the DICOMs are stored. 
+⋅⋅⋅This command will output metadata_example.csv, containing all metadata from all DICOMs, and pixel_data_example.h5 where all pixel data from the DICOMs are stored. 
 
 2. Compile train.csv, valid.csv, and test.csv files containing the ID and label for each scan, as described in headCTclassifier.ipynb. 
 
