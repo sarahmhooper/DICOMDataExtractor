@@ -1,16 +1,12 @@
 # Medical Image Classification
 
-**v0.1.0**
+This classification codebase was designed to provide a convenient pipeline to take a set of medical images and train a variety of convolutional neural networks (CNN) to classify those images in Pytorch. Features include:
 
-We provide a general codebase to perform medical image classification via deep learning using Pytorch. This codebase was designed to provide a convenient pipeline to take a set of medical images, originally (but not necessarily) stored as DICOM files, and train a variety of convolutional neural networks (CNN) to classify those images. Features include:
-- Tools to extract all pixeldata and metadata from a set of DICOM files
+- Automated data loading, training, and model evaluation
 - Implementation of many common CNNs
-- Data loading, training, and model evaluation
 - Support for 2d, 2.5d, and 3d medical image classification
 - Support for weak supervision using text reports
 - Training monitoring via tensorboardX
-
-This project is ongoing, and we'll continue to add to and adjust the codebase over time. Any comments, suggestions, or additions are welcome! 
 
 ## Installation 
 
@@ -38,25 +34,17 @@ pip install -r requirements.txt
 ```
 
 ## Getting started
-Required files, details on the codebase organization, and an example of how to use this codebase to classify medical images are provided in the Jupyter notebookes __headCTclassifier.ipynb__. This notebook will demonstrate how to use this codebase to classify a set of medical images.
-
-To enable function calls from the command line, __run_DICOM_crawler.py__ is provided, which contain the same code as the Jupyter notebooks.
+Required files, details on the codebase organization, and examples of how to use this codebase to classify medical images are provided in the Jupyter notebookes __tutorials/headCTclassifier.ipynb__. To enable function calls from the command line, __run_DICOM_crawler.py__ is also provided, which perform the same operations as their respective Jupyter notebooks listed above.
 
 ## Example usage
-
-you can use a jupyter notebook, as shown in the tutorial
-or, you can call from the command line with arguments 
-
-We recommend you start with the two Jupyter notebooks listed above, which more thoroughly detail the structure and usage of this codebase. Here, we provide an overview of the required steps to take a set of medical images stored in DICOMs and train a CNN for image classification.
-
-1. Extract the pixel data and metadata from the DICOM files:
-```
-python run_DICOM_crawler.py ....
-python run_DICOM_crawler.py -h
-```
-2. Manually generate the train.csv, valid.csv, and test. csv files containing the label for each scan, as described in __headCTclassifier.ipynb__.
-3. Train a classifier for this set of images:
+To train a classifier over a set of images stored in pixel_data_example.h5 with labels stored in train_example.csv, validation_example.csv, and test_example.csv, run:
 ```
 python run_classifier.py ....
+```
+This command will train a 2d resnet18 to classify the images stored in pixel_data_example.h5 according to the labels in train.csv and valid.csv. It will then evaluate the model according to the labels in test.csv. Files generated from this command include: train_log.txt, which stores all outputs from the training process; predicted_labels.csv, which are the best trained model's predictions on the test set (if provided, otherwise the validation set); learning_curve.png, a simple plot of the training and validation loss curves throughout training; a tensorboard events file, which you can use to view all performance metrics and losses as a function of training the train and validation sets; model_best_train_loss.pth and model_best_val_loss.pth, which contain the stored models that acheived the best loss on the trian and validation set, respectively; and finally all_params.txt, which contains the configuration used this run.
+
+To view all parameter options for training, run:
+
+```
 python run_classifier.py -h
 ```
