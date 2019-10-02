@@ -5,8 +5,8 @@ import os
 def run_dicom_crawl():
     
     # Get arguments
-    parser = parse_arg(args=[])
-    config = parser.parse_args()
+    parser = parse_arg()
+    config, unknown = parser.parse_known_args()
     
     # Crawl dicoms
     dicom_crawl(config.dicom_folders, 
