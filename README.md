@@ -38,14 +38,21 @@ pip install -r requirements.txt
 __DICOM_crawler.ipynb__ will demonstrate how to extract pixel data and metadata from a set of DICOM files. To enable function calls from the command line, __run_DICOM_crawler.py__ is also provided to perform the same operations as the Jupyter notebook.
 
 ## Example usage
-Given a set of folders in the directory *storage/dicom_folders*, we can save all of the DICOM metadata into a CSV and save all 3d scans in a h5 file by running:
-```
-python run_DICOM_crawler.py ....
-```
-This command will output metadata_example.csv, containing all metadata from all DICOMs, and pixel_data_example.h5 where all pixel data from the DICOMs are stored. 
-
 To view all parameter options for training, run:
 
 ```
 python run_DICOM_crawler.py -h
 ```
+### Example 1. Save all pixel data into 3d image volumes and save DICOM metadata per scan
+Given a set of folders in the directory *storage/dicom_folders*, we can save all of the DICOM metadata into a CSV and save all 3d scans in a h5 file by running:
+```
+python run_DICOM_crawler.py ....
+```
+This command will output metadata_example1.csv, containing one line of DICOM metadata per 3d scan, and pixel_data_example1.h5 where all 3d images are stored. 
+
+### Example 2. Save the DICOM metadata from every DICOM file 
+Given a set of folders in the directory *storage/dicom_folders*, we can save all of the DICOM metadata from each individual DICOM file into a CSV (without saving any pixel data) by running:
+```
+python run_DICOM_crawler.py ....
+```
+This command will output metadata_example2.csv, containing all metadata from all DICOMs. 
