@@ -12,8 +12,9 @@ This project is ongoing, and we'll continue to add to and adjust the codebase ov
 ## Installation 
 
 *Note: Codebase only supports Python 3.*
+*Note: If using DICOM crawling code with the classification pipeline, you do not need to repeat installation here.* 
 
-1. (Optional) Create a new virtual environment, within which we'll install the codebase and its dependencies:
+1. Create a new virtual environment (or activate an existing environment), within which we'll install the codebase and its dependencies:
 ```
 pip install virtualenv
 virtualenv -p python3.6 DICOMCrawlEnv
