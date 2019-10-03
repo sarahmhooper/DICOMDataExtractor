@@ -427,7 +427,7 @@ def parse_arg():
         type=confirm_bool,
         default=False,
         choices=[True,False],
-        help="Boolean indicator for whether to rewrite pixel data to an h5 file",
+        help="Boolean indicator for whether to write pixel data to an h5 file",
     )
     
     parser.add_argument(
@@ -443,7 +443,7 @@ def parse_arg():
         type=confirm_bool,
         default=False,
         choices=[True,False],
-        help="Choose whether to parallelize over the folders by setting par_over_folder to True, or over the scans within a folder by setting par_over_folder to False. If you have many folders in dicom_folders, each with O(1) scan, set to True. If you have many scans per folder, set to False.",
+        help="Choose whether to parallelize over the folders by setting par_over_folder to True, or over the scans within a folder by setting par_over_folder to False. If you have many folders in dicom_folders, each with O(1) scan, set to True. If you have many scans per folder, set to False. Note this parallelization is only used when evaluating 3d data.",
     )
     
     return parser
