@@ -228,7 +228,6 @@ def crawl_folder(folder, existing_scan_ids, pixeldata_storage_fn, metadata_stora
     '''
     # Collect all DICOMs in folder
     if not par_over_folder: 
-        print('Working on folder:',folder)
         print('Ensuring all files in folder are DICOMs, this may take seconds to tens of minutes depending on the number of DICOMs in the folder.')
     all_dicoms = []
     for f in os.listdir(folder):
@@ -374,7 +373,8 @@ def dicom_crawl(dicom_folders, storage_folder, output_id, n_procs, write_pixelda
         pool.close()
         pool.join()
     else:
-        for folder in dicom_folders:
+        for f_ind,folder in enumerate(dicom_folders):
+            print('Working on folder',f_ind,'of',len(dicom_folders),', named:',folder)
             crawl_folder(folder,
                          existing_scan_ids,
                          pixeldata_storage_fn,
