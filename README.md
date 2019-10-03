@@ -27,7 +27,7 @@ source DICOMCrawlEnv/bin/activate
 
 3. Clone the repository:
 ```
-git clone 
+git clone https://github.com/sarahmhooper/DICOMDataExtractor.git
 ```
 
 4. Install the required Python dependencies: 
@@ -36,20 +36,15 @@ pip install -r requirements.txt
 ```
 
 ## Getting started
-__DICOM_crawler.ipynb__ will demonstrate how to extract pixel data and metadata from a set of DICOM files. To enable function calls from the command line, __run_DICOM_crawler.py__ is also provided to perform the same operations as the Jupyter notebook.
+__crawler_tutorial.ipynb__ will demonstrate how to extract pixel data and metadata from a set of DICOM files. To enable function calls from the command line, __run_crawler.py__ is also provided to perform the same operations as the Jupyter notebook.
 
 ## Example usage
 To view all parameter options for training, run:
 
 ```
-python run_DICOM_crawler.py -h
+python run_crawler.py -h
 ```
-### Example 1. Save all pixel data into 3d image volumes and save DICOM metadata per scan
-Given a set of folders in the directory *storage/dicom_folders*, we can save all of the DICOM metadata into a CSV and save all 3d scans in a h5 file by running:
-```
-python run_DICOM_crawler.py ....
-```
-This command will output metadata_example1.csv, containing one line of DICOM metadata per 3d scan, and pixel_data_example1.h5 where all 3d images are stored. 
+### Example 1. Save all metadata friom each DICOM folder without saving any pixel data. 
 
 ### Example 2. Save the DICOM metadata from every DICOM file 
 Given a set of folders in the directory *storage/dicom_folders*, we can save all of the DICOM metadata from each individual DICOM file into a CSV (without saving any pixel data) by running:
@@ -57,3 +52,10 @@ Given a set of folders in the directory *storage/dicom_folders*, we can save all
 python run_DICOM_crawler.py ....
 ```
 This command will output metadata_example2.csv, containing all metadata from all DICOMs. 
+
+### Example 3. Save all pixel data into 3d image volumes and save DICOM metadata per scan
+Given a set of folders in the directory *storage/dicom_folders*, we can save all of the DICOM metadata into a CSV and save all 3d scans in a h5 file by running:
+```
+python run_DICOM_crawler.py ....
+```
+This command will output metadata_example1.csv, containing one line of DICOM metadata per 3d scan, and pixel_data_example1.h5 where all 3d images are stored. 
