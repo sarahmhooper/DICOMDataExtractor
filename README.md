@@ -44,21 +44,21 @@ To view all parameter options for training, run:
 ```
 python run_crawler.py -h
 ```
-### Example 1. Save all metadata friom each DICOM folder without saving any pixel data. 
+#### Example 1. Save all metadata friom each DICOM folder without saving any pixel data. 
 Given a set of folders in the directory *storage/dicom_folders*, we can save all of the DICOM metadata from each individual DICOM file into a CSV (without saving any pixel data) by running:
 ```
 python run_DICOM_crawler.py --dicom_folders "['storage/dicom_folders']" --output_id 'example1' --n_procs 1 --write_pixeldata False --eval_3d_scans False
 ```
 This command will output metadata_example1.csv, containing all metadata from all DICOMs. 
 
-### Example 2. Save all pixel data from each DICOM as a 2d image and save all DICOM metadata per file
+#### Example 2. Save all pixel data from each DICOM as a 2d image and save all DICOM metadata per file
 Given a set of folders in the directory *storage/dicom_folders*, we can save all of the DICOM metadata into a CSV and save all 2d images in an h5 file by running:
 ```
 python run_DICOM_crawler.py --dicom_folders "['storage/dicom_folders']" --output_id 'example2' --n_procs 1 --write_pixeldata True --eval_3d_scans False
 ```
 This command will output metadata_example2.csv, containing one line of DICOM metadata per DICOM file, and pixel_data_example2.h5 where all 2d images are stored. 
 
-### Example 3. Save all pixel data from each series of DICOMs into 3d image volumes and save DICOM metadata per series
+#### Example 3. Save all pixel data from each series of DICOMs into 3d image volumes and save DICOM metadata per series
 Given a set of folders in the directory *storage/dicom_folders*, we can save the DICOM metadata for each series into a CSV and save all 3d scans in a h5 file by running:
 ```
 python run_DICOM_crawler.py --dicom_folders "['storage/dicom_folders']" --output_id 'example3' --n_procs 20 --write_pixeldata True --eval_3d_scans True
