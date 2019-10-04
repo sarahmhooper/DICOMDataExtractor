@@ -31,6 +31,7 @@ git clone https://github.com/sarahmhooper/DICOMDataExtractor.git
 
 4. Install the required Python dependencies: 
 ```
+cd DICOMDataExtractor
 pip install -r requirements.txt
 ```
 
