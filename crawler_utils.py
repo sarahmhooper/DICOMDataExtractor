@@ -230,7 +230,7 @@ def crawl_folder(folder, existing_scan_ids, pixeldata_storage_fn, metadata_stora
     if not par_over_folder: 
         print('Ensuring all files in folder are DICOMs, this may take seconds to tens of minutes depending on the number of DICOMs in the folder.')
     all_dicoms = []
-    for f in os.listdir(folder):
+    for f in os.listdir(folder)[:1000]:
         if os.path.isfile(os.path.join(folder,f)):
             try:
                 if "dicom" in str.lower(magic.from_file(os.path.join(folder,f))): all_dicoms += [os.path.join(folder,f)]
@@ -317,6 +317,10 @@ def dicom_crawl(dicom_folders, storage_folder, output_id, n_procs, write_pixelda
             print("\t Removing: ", dicom_folders[folder_ind])
             del dicom_folders[folder_ind]
 
+    # Create the desired storage folder
+    if not os.path.exists(storage_folder):
+        os.mkdir(storage_folder)
+        
     # Make sure number of entries in stored metadata and pixeldata match; otherwise, throw error and alert user.
     if write_pixeldata:
         if os.path.exists(metadata_storage_fn) != os.path.exists(pixeldata_storage_fn):
@@ -374,7 +378,7 @@ def dicom_crawl(dicom_folders, storage_folder, output_id, n_procs, write_pixelda
         pool.join()
     else:
         for f_ind,folder in enumerate(dicom_folders):
-            print('Working on folder',f_ind,'of',len(dicom_folders),', named:',folder)
+            print('Working on folder',f_ind+1,'of',len(dicom_folders),', named:',folder)
             crawl_folder(folder,
                          existing_scan_ids,
                          pixeldata_storage_fn,
