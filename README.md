@@ -36,6 +36,8 @@ pip install -r requirements.txt
 ## Getting started
 __crawler_tutorial.ipynb__ will demonstrate how to extract pixel data and metadata from a set of DICOM files. To enable function calls from the command line, __run_crawler.py__ is also provided to perform the same operations as the Jupyter notebook.
 
+As a user, you need to generate a list of directories where DICOMs are stored. Each directory in the list should contain DICOM files (i.e., we won't parse through to find subdirectories).
+
 ## Example usage
 To view all parameter options for training, run:
 
@@ -43,22 +45,34 @@ To view all parameter options for training, run:
 python run_crawler.py -h
 ```
 #### Example 1. Save all metadata from each DICOM folder without saving any pixel data. 
-Given the directories *storage/dicom_folders1* and */storage/dicom_folders2* storing many DICOM files, we can save all of the DICOM metadata from each individual DICOM file into a CSV (without saving any pixel data) by running:
+We can save all of the DICOM metadata from each DICOM file into a CSV without saving any pixel data by setting ``write_pixeldata=False``:
 ```
-python run_crawler.py --dicom_folders "['storage/dicom_folders1','storage/dicom_folders2']" --output_id 'example1' --n_procs 1 --write_pixeldata False --eval_3d_scans False
+python run_crawler.py --dicom_folders "['storage/dicom_folder1','storage/dicom_folder2']" --output_id 'example1' --n_procs 1 --write_pixeldata False --eval_3d_scans False
 ```
 This command will output metadata_example1.csv, containing all metadata from all DICOMs. 
 
 #### Example 2. Save all pixel data from each DICOM as a 2d image and save all DICOM metadata per file
-Given the directories *storage/dicom_folders1* and */storage/dicom_folders2* storing many DICOM files, we can save all of the DICOM metadata into a CSV and save all 2d images in an h5 file by running:
+We can save all of the DICOM metadata from each DICOM file into a CSV and save pixel data from each DICOM separately into an h5 file by setting ``write_pixeldata=True`` and ``eval_3d_scans=False``:
 ```
-python run_crawler.py --dicom_folders "['storage/dicom_folders1','storage/dicom_folders2']" --output_id 'example2' --n_procs 1 --write_pixeldata True --eval_3d_scans False
+python run_crawler.py --dicom_folders "['storage/dicom_folder1','storage/dicom_folder2']" --output_id 'example2' --n_procs 1 --write_pixeldata True --eval_3d_scans False
 ```
 This command will output metadata_example2.csv, containing one line of DICOM metadata per DICOM file, and pixel_data_example2.h5 where all 2d images are stored. 
 
 #### Example 3. Save all pixel data from each series of DICOMs into 3d image volumes and save DICOM metadata for each series
-Given the directories *storage/dicom_folders1* and */storage/dicom_folders2* storing many DICOM files, we can save the DICOM metadata for each series into a CSV and save all 3d image volumes in an h5 file by running:
+We can save the DICOM metadata for each image series into a CSV and save all 3d image volumes in an h5 file by setting ``write_pixeldata=True`` and ``eval_3d_scans=True``:
 ```
-python run_crawler.py --dicom_folders "['storage/dicom_folders1','storage/dicom_folders2']" --output_id 'example3' --n_procs 20 --write_pixeldata True --eval_3d_scans True
+python run_crawler.py --dicom_folders "['storage/dicom_folder1','storage/dicom_folder2']" --output_id 'example3' --n_procs 20 --write_pixeldata True --eval_3d_scans True
 ```
-This command will output metadata_example3.csv, containing one line of DICOM metadata per series (3d image volume), and pixel_data_example3.h5 where all image volumes are stored. 
+This command will output metadata_example3.csv, containing one line of DICOM metadata per series (3d image volume), and pixel_data_example3.h5 where all image volumes are stored. When grouping DICOMs to store 3d scans, this code will check all DICOMs in a given folder for unique Series Instance UIDs. If multiple Series Instance UIDs are present in the folder, indicating more than one scan present in that folder, then DICOMs with the same UID will be grouped and stored together. 
+
+
+## Additional notes
+
+ - The code may generate ``unreadable_files.csv``, which contains a row for each scan that did not successfully have metadata and/or pixel data extracted; if a Scan ID appears in unreadable_files.csv, it should not appear in either pixel_data.h5 or metadata.csv. A brief reason indicating why the read failed is provided in each row.
+
+ - If output files pixel_data.h5 and metadata.csv already exist, running this code will append onto the existing files with new scans; any scans already stored will be ignored. This is useful if you acquire new data you want to add to your dataset, or if your dicom_crawl() call is stopped sometime during execution.
+
+ - Sometimes, there will be duplicate tags in the DICOM header. If this is the case, all values associated with that tag will be stored in the same cell in metadata.csv. For example, if the tag "Example tag (0000, 0000)" appears twice in the DICOM header, once with the value "1" and once with the value "2", then the stored metadata for "Example tag (0000, 0000)" will appear as "DUPLICATE TAGS IN DICOM:1/2".
+
+ - If the header row in metadata.csv contains two phrases connected by an underscore (e.g., "Referenced Image Sequence_Group Length (0008, 0000)") this indicates that the second tag ("Group Length") was nested inside of the first tag ("Referenced Image Sequence").
+
