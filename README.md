@@ -12,13 +12,12 @@ Any comments, suggestions, or additions are welcome!
 To use this code, first clone the repo then install dependencies using ``requirements.txt``; we recommend doing so in a virtual environment using Python 3. 
 
 ## Getting started
-__crawler_tutorial.ipynb__ will demonstrate how to extract pixel data and metadata from a set of DICOM files. To enable function calls from the command line, __run_crawler.py__ is also provided to perform the same operations as the Jupyter notebook.
+Start with __crawler_tutorial.ipynb__, which will demonstrate how to extract pixel data and metadata from a set of DICOM files and describe the variables you need to set. 
 
-There are a few parameters that you need to set to run the dicom crawling code; these parameters are described in __crawler_tutorial.ipynb__. Alternatively, to view all parameter options for training, run:
-
-```
+To enable function calls from the command line, __run_crawler.py__ is also provided to perform the same operations as the Jupyter notebook. To view all parameter options for training, run
+``
 python run_crawler.py -h
-```
+``
 
 
 ## Example usage
