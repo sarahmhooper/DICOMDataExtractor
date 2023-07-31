@@ -46,7 +46,7 @@ This command will output metadata_example3.csv, containing one line of DICOM met
 
 ## Additional notes
 
- - The code may generate ``unreadable_files.csv``, which contains a row for each scan that did not successfully have metadata and/or pixel data extracted; if a Scan ID appears in unreadable_files.csv, it should not appear in either pixel_data.h5 or metadata.csv. A brief reason indicating why the read failed is provided in each row.
+ - The code may generate unreadable_files.csv, which contains a row for each scan that did not successfully have metadata and/or pixel data extracted; if a Scan ID appears in unreadable_files.csv, it should not appear in either pixel_data.h5 or metadata.csv. A brief reason indicating why the read failed is provided in each row.
 
  - If output files pixel_data.h5 and metadata.csv already exist, running this code will append onto the existing files with new scans; any scans already stored will be ignored. This is useful if you acquire new data you want to add to your dataset, or if your dicom_crawl() call is stopped sometime during execution.
 
