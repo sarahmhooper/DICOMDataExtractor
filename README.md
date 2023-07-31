@@ -9,9 +9,7 @@ Any comments, suggestions, or additions are welcome!
 
 ## Installation 
 
-*Note: Codebase only supports Python 3.* 
-
-To use this code, first clone the repo then install dependencies using ``requirements.txt``; we recommend doing so in a virtual environment. 
+To use this code, first clone the repo then install dependencies using ``requirements.txt``; we recommend doing so in a virtual environment using Python 3. 
 
 ## Getting started
 __crawler_tutorial.ipynb__ will demonstrate how to extract pixel data and metadata from a set of DICOM files. To enable function calls from the command line, __run_crawler.py__ is also provided to perform the same operations as the Jupyter notebook.
