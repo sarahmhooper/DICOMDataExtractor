@@ -4,9 +4,7 @@ Medical images are often stored as DICOMs, which can be an inconvenient storage 
 - Given a set of DICOM files, the script stores all pixel data from all provided DICOMs in an HDF5 file which can be more efficiently accessed and is more familiar to machine learning practitioners. 
 - If desired, the script will automatically identify DICOM files that originated from the same series, order the slices into a 3d image volume, and save the 3d image in an h5 file. Note: this function assumes the DICOM files represent axial slices - not sagittal or coronal slices - of the same series.
 
-*Note: to use the resulting files to train a classifier in Pytorch, see our MedicalImageClassifier repository.*
-
-This project is ongoing, and we'll continue to add to and adjust the codebase over time. Any comments, suggestions, or additions are welcome!
+Any comments, suggestions, or additions are welcome!
 
 
 ## Installation 
