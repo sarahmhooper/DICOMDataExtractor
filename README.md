@@ -41,7 +41,7 @@ We can save the DICOM metadata for each image series into a CSV and save all 3d 
 ```
 python run_crawler.py --dicom_folders "['storage/dicom_folder1','storage/dicom_folder2']" --output_id 'example3' --n_procs 20 --write_pixeldata True --eval_3d_scans True
 ```
-This command will output metadata_example3.csv, containing one line of DICOM metadata per series (3d image volume), and pixel_data_example3.h5 where all image volumes are stored. When grouping DICOMs to store 3d scans, this code will check all DICOMs in a given folder for unique Series Instance UIDs. If multiple Series Instance UIDs are present in the folder, indicating more than one scan present in that folder, then DICOMs with the same UID will be grouped and stored together. 
+This command will output metadata_example3.csv, containing one line of DICOM metadata per 3d image volume, and pixel_data_example3.h5 where all image volumes are stored. When grouping DICOMs to store 3d scans, this code will check all DICOMs in a given folder for unique Series Instance UIDs. If multiple Series Instance UIDs are present in the folder, indicating more than one scan present in that folder, then DICOMs with the same UID will be grouped and stored together. 
 
 
 ## Additional notes
