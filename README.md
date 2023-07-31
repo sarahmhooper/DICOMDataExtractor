@@ -11,39 +11,20 @@ Any comments, suggestions, or additions are welcome!
 
 *Note: Codebase only supports Python 3.* 
 
-1. Create a new virtual environment, within which we'll install the codebase and its dependencies:
-```
-pip install virtualenv
-virtualenv -p python3 DICOMCrawlEnv
-```
-
-2. Activate the desired virtual environment:
-```
-source DICOMCrawlEnv/bin/activate
-```
-
-3. Clone the repository:
-```
-git clone https://github.com/sarahmhooper/DICOMDataExtractor.git
-```
-
-4. Install the required Python dependencies: 
-```
-cd DICOMDataExtractor
-pip install -r requirements.txt
-```
+To use this code, first clone the repo then install dependencies using ``requirements.txt``; we recommend doing so in a virtual environment. 
 
 ## Getting started
 __crawler_tutorial.ipynb__ will demonstrate how to extract pixel data and metadata from a set of DICOM files. To enable function calls from the command line, __run_crawler.py__ is also provided to perform the same operations as the Jupyter notebook.
 
-As a user, you need to generate a list of directories where DICOMs are stored. Each directory in the list should contain DICOM files (i.e., we won't parse through to find subdirectories).
-
-## Example usage
-To view all parameter options for training, run:
+There are a few parameters that you need to set to run the dicom crawling code; these parameters are described in __crawler_tutorial.ipynb__. Alternatively, to view all parameter options for training, run:
 
 ```
 python run_crawler.py -h
 ```
+
+
+## Example usage
+
 #### Example 1. Save all metadata from each DICOM folder without saving any pixel data. 
 We can save all of the DICOM metadata from each DICOM file into a CSV without saving any pixel data by setting ``write_pixeldata=False``:
 ```
