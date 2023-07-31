@@ -22,7 +22,7 @@ python run_crawler.py -h
 
 ## Example usage
 
-#### Example 1. Save all metadata from each DICOM folder without saving any pixel data. 
+#### Example 1. Save all metadata from each DICOM folder without saving any pixel data
 We can save all of the DICOM metadata from each DICOM file into a CSV without saving any pixel data by setting ``write_pixeldata=False``:
 ```
 python run_crawler.py --dicom_folders "['storage/dicom_folder1','storage/dicom_folder2']" --output_id 'example1' --n_procs 1 --write_pixeldata False --eval_3d_scans False
