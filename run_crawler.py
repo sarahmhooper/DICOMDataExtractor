@@ -1,6 +1,4 @@
 from crawler_utils import dicom_crawl, parse_arg
-import glob
-import os
 
 def run_dicom_crawl():
     
