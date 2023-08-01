@@ -324,11 +324,11 @@ def dicom_crawl(dicom_folders, storage_folder, output_id, n_procs, write_pixelda
     # Make sure number of entries in stored metadata and pixeldata match; otherwise, throw error and alert user.
     if write_pixeldata:
         if os.path.exists(metadata_storage_fn) != os.path.exists(pixeldata_storage_fn):
-            raise ValueError("\Either pixel data file OR metadata file exists, but not both \nPlease specify a new output_id or delete existing output files and try again.")
+            raise ValueError("\nEither pixel data file OR metadata file exists, but not both \nPlease specify a new output_id or delete existing output files and try again.")
         elif os.path.exists(metadata_storage_fn) and os.path.exists(pixeldata_storage_fn):
             with h5py.File(pixeldata_storage_fn, mode="r") as h5file:
                 if set(h5file.keys()) != set(pd.read_csv(metadata_storage_fn)["Scan ID"]):
-                    raise ValueError("\Existing pixeldata H5 and metadata CSV do not have matching sets of scan IDs \nPlease specify a new output_id or delete existing output files and try again.")
+                    raise ValueError("\nExisting pixeldata H5 and metadata CSV do not have matching sets of scan IDs \nPlease specify a new output_id or delete existing output files and try again.")
 
     # Check to see if output files already exist; if so, this code will skip scans already stored and append new scans to existing files
     existing_scan_ids = []
