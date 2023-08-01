@@ -13,6 +13,7 @@ from tqdm import *
 from collections import defaultdict
 
 def dataset_tags_and_values(dataset, tags=[], values=[], starting_seq='', loop=0):
+    # JD: Why is values a param if it shouldn't be altered?  Should it just be defined inside the function?  Or is it a private arg? (i.e. you want it there for internal reasons, but the user should never call it?)
     '''
     This function finds all metadata (i.e., tags and corresponding values) contained in a pydicom dataset, excluding the pixel data.
     :param dataset: a pydicom dataset; contains all information from a DICOM file
@@ -49,6 +50,7 @@ def dataset_tags_and_values(dataset, tags=[], values=[], starting_seq='', loop=0
     return tags, values
 
 def order_image_num(dicoms):
+    # JD: How universally will this function work?  May be worth giving a reference/pointer to what these image numebers are/mean?  Maybe explicitly say it's the "InstanceNumber" field?
     '''
     This function orders dicoms based on the image number found in each dicom's metadata.
     :param dicoms: A list containing paths to all dicoms for this scan
@@ -59,6 +61,7 @@ def order_image_num(dicoms):
     return slice_order
 
 def order_z_pos(dicoms):
+    # JD: You could probably paralellize this if you wanted/if it takes a while
     '''
     This function orders dicoms based on the z position found in each dicom's metadata.
     :param dicoms: A list containing paths to all dicoms for this scan
@@ -90,6 +93,7 @@ def get_pixel_data(dicoms, save_3d_scans):
     '''
     try:
         # Determine slice order based off of metadata image number, image z position, then number in filename
+        # JD: this construction seems awkward -- is there a way to do it without the weird try-break-except-continue?
         for fn in [order_image_num, order_z_pos, order_fn_num]:
             try:
                 slice_order = fn(dicoms)
@@ -135,6 +139,7 @@ def extract_data(dicoms, scan_id, write_pixeldata, save_3d_scans):
                 successful_access = True
                 pixeldata = []
             if successful_access:
+                # JD: Is this always true (the first one has all the right data)? may be worth putting upfront so the user knows!
                 # Find all metadata tags and corresponding values from a DICOM; NOTE: this code only stores the metadata for ONE DICOM file in dicoms (i.e. it assumes that all needed dicom header information is the same for all slices)
                 tags, values = dataset_tags_and_values(pydicom.dcmread(dicoms[0]),tags=['Scan ID','No. DICOMs in scan'], values=[scan_id,len(dicoms)])  # Initialize metadata tags and values
             else: reason = "Failure in get_pixel_data"
@@ -163,6 +168,7 @@ def crawl_uid(uid_dicoms, folder, existing_scan_ids, pixeldata_storage_fn, metad
     :return nothing, files are written to within this function
     '''
     # Create scan_id, used to uniquely identify each set of DICOMs in all output files, and gather all DICOMs with correct UID
+    # JD: I bet there are other characters that you probably want to replace here -- maybe use a regex to catch more?
     scan_id = folder.replace("/","_").replace("\\","_").replace("//","_") + "_" + uid_dicoms[0]
     
     # Only process scans that were not stored by a previous run
@@ -172,6 +178,7 @@ def crawl_uid(uid_dicoms, folder, existing_scan_ids, pixeldata_storage_fn, metad
         successful_access, reason, tags, values, pixeldata = extract_data(uid_dicoms[1], scan_id, write_pixeldata, save_3d_scans)
 
         # Make sure files are only being written to by this processor
+        # JD: maybe give one more comment on why this is important? Do you call this function in parallel?
         if save_3d_scans: lock.acquire()
         
         # If there was a successful read of the DICOMs, store all data.
@@ -227,6 +234,7 @@ def crawl_folder(folder, existing_scan_ids, pixeldata_storage_fn, metadata_stora
     :return nothing, files are written to within this function
     '''
     # Collect all DICOMs in folder
+    # JD: A nice-to-have but not critical: change these prints to the logging package (e.g. logging.INFO).  See how emmental does it, for instacne.  
     if not par_over_folder: 
         print('Ensuring all files in folder are DICOMs, this may take seconds to tens of minutes depending on the number of DICOMs in the folder.')
     all_dicoms = []
@@ -475,5 +483,6 @@ def init(l):
     '''
     This function is used by multiprocessing to lock before writing to files
     '''
+    # JD: maybe tell me why I need it
     global lock
     lock = l
